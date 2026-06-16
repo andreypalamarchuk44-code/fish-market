@@ -73,12 +73,17 @@ function onImgError(e) {
 
 <style scoped>
 .card {
-  position: relative; overflow: hidden;
-  background: white; border-radius: 22px;
+  position: relative;
+  overflow: hidden;
+  background: white;
+  border-radius: 22px;
   box-shadow: var(--shadow);
   transition: transform .25s, box-shadow .25s;
-  display: flex; flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
+
 .card:hover {
   transform: translateY(-5px);
   box-shadow: var(--shadow-lg);
@@ -89,23 +94,25 @@ function onImgError(e) {
   height: 280px;
   overflow: hidden;
   background:
-    radial-gradient(circle at center,
+    radial-gradient(
+      circle at center,
       #ffffff 0%,
-      #f8fafc 100%);
+      #f8fafc 100%
+    );
 }
+
 .card__image {
   width: 100%;
   height: 100%;
-
   object-fit: contain;
   object-position: center;
-
   padding: 10px;
 
   transition:
     transform .6s cubic-bezier(.22,1,.36,1),
     filter .4s ease;
 }
+
 .card:hover .card__image {
   animation: swim 3s ease-in-out infinite;
 }
@@ -124,57 +131,246 @@ function onImgError(e) {
       translateX(5px);
   }
 }
+
 .card__badge {
-  position: absolute; top: 12px; left: 12px;
+  position: absolute;
+  top: 12px;
+  left: 12px;
+
   background: rgba(13,74,69,.9);
-  color: white; padding: 5px 11px;
-  border-radius: 99px; font-size: 12px; font-weight: 600;
+  color: white;
+
+  padding: 6px 12px;
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: 600;
+  z-index: 2;
 }
 
 .card__body {
-  padding: 18px 20px 20px;
-  display: flex; flex-direction: column; flex: 1;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
+
 .card__name {
-  font-size: 19px; font-weight: 700;
-  color: var(--ink); margin-bottom: 7px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 8px;
 }
+
 .card__desc {
-  color: var(--muted); line-height: 1.6;
-  font-size: 14px; margin-bottom: 12px; flex: 1;
+  color: var(--muted);
+  line-height: 1.6;
+  font-size: .9rem;
+  margin-bottom: 14px;
+  flex: 1;
 }
+
 .card__meta {
-  display: flex; align-items: center; gap: 5px;
-  color: var(--muted); margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  color: var(--muted);
+  margin-bottom: 18px;
 }
-.card__weight { font-size: 13px; }
+
+.card__weight {
+  font-size: .85rem;
+}
 
 .card__footer {
-  display: flex; justify-content: space-between;
-  align-items: center; gap: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
 }
-.card__price { font-size: 26px; font-weight: 800; color: var(--teal-900); }
-.card__unit { display: block; color: var(--muted); font-size: 12px; }
+
+.card__price {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: var(--teal-900);
+  line-height: 1;
+}
+
+.card__unit {
+  display: block;
+  color: var(--muted);
+  font-size: .75rem;
+  margin-top: 2px;
+}
 
 .card__btn {
-  border: none; cursor: pointer;
-  background: var(--teal-700); color: white;
-  border-radius: 12px; padding: 11px 16px;
-  font-size: 14px; font-weight: 600;
-  transition: background .2s, transform .15s;
-  display: flex; align-items: center; gap: 6px;
-  white-space: nowrap;
-}
-.card__btn:hover:not(:disabled) { background: var(--teal-900); transform: translateY(-1px); }
-.card__btn:disabled { background: var(--teal-500); cursor: default; }
+  border: none;
+  cursor: pointer;
 
-/* Flash banner */
-.card__flash {
-  position: absolute; bottom: 0; left: 0; right: 0;
-  background: var(--teal-700); color: white;
-  text-align: center; padding: 10px;
-  font-size: 14px; font-weight: 600;
+  background: var(--teal-700);
+  color: white;
+
+  border-radius: 12px;
+
+  padding: 12px 18px;
+
+  font-size: .9rem;
+  font-weight: 600;
+
+  transition:
+    background .2s,
+    transform .15s;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  white-space: nowrap;
+  min-height: 46px;
 }
-.flash-enter-active, .flash-leave-active { transition: opacity .2s, transform .2s; }
-.flash-enter-from, .flash-leave-to { opacity: 0; transform: translateY(8px); }
+
+.card__btn:hover:not(:disabled) {
+  background: var(--teal-900);
+  transform: translateY(-1px);
+}
+
+.card__btn:disabled {
+  background: var(--teal-500);
+  cursor: default;
+}
+
+.card__flash {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  background: var(--teal-700);
+  color: white;
+
+  text-align: center;
+  padding: 10px;
+
+  font-size: .9rem;
+  font-weight: 600;
+}
+
+.flash-enter-active,
+.flash-leave-active {
+  transition:
+    opacity .2s,
+    transform .2s;
+}
+
+.flash-enter-from,
+.flash-leave-to {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+/* ========================= */
+/* TABLET */
+/* ========================= */
+
+@media (max-width: 992px) {
+  .card__image-wrap {
+    height: 240px;
+  }
+
+  .card__name {
+    font-size: 1.1rem;
+  }
+
+  .card__price {
+    font-size: 1.5rem;
+  }
+}
+
+/* ========================= */
+/* MOBILE */
+/* ========================= */
+
+@media (max-width: 768px) {
+  .card {
+    border-radius: 18px;
+  }
+
+  .card__image-wrap {
+    height: 220px;
+  }
+
+  .card__body {
+    padding: 16px;
+  }
+
+  .card__footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .card__btn {
+    width: 100%;
+  }
+
+  .card__price {
+    font-size: 1.45rem;
+  }
+}
+
+/* ========================= */
+/* SMALL MOBILE */
+/* ========================= */
+
+@media (max-width: 480px) {
+  .card__image-wrap {
+    height: 180px;
+  }
+
+  .card__body {
+    padding: 14px;
+  }
+
+  .card__name {
+    font-size: 1rem;
+  }
+
+  .card__desc {
+    font-size: .85rem;
+  }
+
+  .card__price {
+    font-size: 1.3rem;
+  }
+
+  .card__btn {
+    padding: 11px 14px;
+    font-size: .85rem;
+  }
+
+  .card__badge {
+    font-size: 11px;
+    padding: 5px 10px;
+  }
+}
+
+/* ========================= */
+/* VERY SMALL DEVICES */
+/* ========================= */
+
+@media (max-width: 360px) {
+  .card__image-wrap {
+    height: 160px;
+  }
+
+  .card__price {
+    font-size: 1.15rem;
+  }
+
+  .card__btn {
+    font-size: .8rem;
+    padding: 10px 12px;
+  }
+}
 </style>
